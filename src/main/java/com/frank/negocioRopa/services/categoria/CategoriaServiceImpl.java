@@ -12,4 +12,12 @@ public class CategoriaServiceImpl extends BaseServiceImpl<Categoria, Long> imple
     @Autowired
     CategoriaRepository repository;
 
+    @Override
+    public Categoria findByName(String name) throws Exception {
+        try {
+            return repository.findByName(name).orElse(null);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }
