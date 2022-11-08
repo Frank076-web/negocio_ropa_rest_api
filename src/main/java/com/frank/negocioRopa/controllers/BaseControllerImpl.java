@@ -6,6 +6,8 @@ import com.frank.negocioRopa.services.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 
 abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseService<E, Long>> implements BaseController<E, Long> {
 
@@ -15,6 +17,7 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
     protected ResponseEntityHanlder response;
 
     @Override
+    @GetMapping("")
     public ResponseEntity<?> getAll() throws Exception {
         try {
             return response.buildResponse(HttpStatus.OK, service.findAll(), "OK");
@@ -24,7 +27,8 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
     }
 
     @Override
-    public ResponseEntity<?> getOneById(Long id) throws Exception {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOneById(@PathVariable Long id) throws Exception {
         try {
             return response.buildResponse(HttpStatus.OK, service.findOneById(id), "OK");
         } catch (Exception e){
@@ -33,7 +37,8 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
     }
 
     @Override
-    public ResponseEntity<?> save(E entity) throws Exception {
+    @PostMapping("")
+    public ResponseEntity<?> save(@RequestBody E entity) throws Exception {
         try {
             return response.buildResponse(HttpStatus.CREATED, service.create(entity), "OK");
         } catch (Exception e){
@@ -42,7 +47,8 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
     }
 
     @Override
-    public ResponseEntity<?> update(E entity) throws Exception {
+    @PutMapping("")
+    public ResponseEntity<?> update(@RequestBody E entity) throws Exception {
         try {
             return response.buildResponse(HttpStatus.OK, service.update(entity), "OK");
         } catch (Exception e){
@@ -51,7 +57,8 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
     }
 
     @Override
-    public ResponseEntity<?> remove(Long id) throws Exception {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remove(@PathVariable Long id) throws Exception {
         try {
             service.delete(id);
             return response.buildResponse(HttpStatus.OK, "Eliminado Correctamente");
