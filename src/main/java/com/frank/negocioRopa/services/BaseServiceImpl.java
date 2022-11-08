@@ -4,6 +4,7 @@ import com.frank.negocioRopa.entities.BaseEntity;
 import com.frank.negocioRopa.repositories.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
     BaseRepository<E, ID> repository;
 
     @Override
+    @Transactional
     public List<E> findAll() throws Exception {
         try {
             return repository.findAll();
@@ -23,6 +25,7 @@ abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
     }
 
     @Override
+    @Transactional
     public E findOneById(ID id) throws Exception {
         try {
             return repository.findById(id).get();
@@ -32,6 +35,7 @@ abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
     }
 
     @Override
+    @Transactional
     public E create(E entity) throws Exception {
         try {
             entity.setFechaCreacion(new Date());
@@ -42,6 +46,7 @@ abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
     }
 
     @Override
+    @Transactional
     public E update(E entity) throws Exception {
         try {
             if (repository.findById((ID) entity.getId()).isPresent()) {
@@ -55,6 +60,7 @@ abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
     }
 
     @Override
+    @Transactional
     public void delete(ID id) throws Exception {
         try {
             if (repository.findById(id).isPresent()) {
