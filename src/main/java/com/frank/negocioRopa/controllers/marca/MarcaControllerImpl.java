@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/v1/marcas")
@@ -15,6 +17,16 @@ public class MarcaControllerImpl extends BaseControllerImpl<Marca, MarcaServiceI
 
     @Autowired
     MarcaServiceImpl service;
+
+    @Override
+    @GetMapping("/nombre")
+    public ResponseEntity<?> getMarcasCoincidentByName(@PathParam("name") String name) {
+        try {
+            return response.buildResponse(HttpStatus.OK, service.findCoincidentByName(name), "OK");
+        } catch (Exception e){
+            return response.buildResponse(HttpStatus.NOT_FOUND, "Hubo un error, por favor intente de nuevo más tarde");
+        }
+    }
 
     @Override
     @PostMapping("")
