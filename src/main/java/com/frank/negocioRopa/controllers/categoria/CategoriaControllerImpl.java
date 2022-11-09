@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/v1/categorias")
@@ -21,6 +23,16 @@ public class CategoriaControllerImpl extends BaseControllerImpl<Categoria, Categ
     public ResponseEntity<?> getMarcasAssociatedWithCategoria(@PathVariable Long id) {
         try {
             return response.buildResponse(HttpStatus.OK, service.findMarcasAssosiatedWithCategoria(id), "OK");
+        } catch (Exception e){
+            return response.buildResponse(HttpStatus.NOT_FOUND, "Hubo un error, por favor intente de nuevo más tarde");
+        }
+    }
+
+    @Override
+    @GetMapping("/nombre")
+    public ResponseEntity<?> getCategoriasCoincidentByName(@PathParam("name") String name) {
+        try {
+            return response.buildResponse(HttpStatus.OK, service.findCoincidentByName(name), "OK");
         } catch (Exception e){
             return response.buildResponse(HttpStatus.NOT_FOUND, "Hubo un error, por favor intente de nuevo más tarde");
         }

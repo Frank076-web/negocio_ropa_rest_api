@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +23,15 @@ public class MarcaServiceImpl extends BaseServiceImpl<Marca, Long> implements Ma
         try {
             return repository.findByName(name).orElse(null);
         } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public List<Marca> findCoincidentByName(String name) throws Exception {
+        try {
+            List<Marca> marcas = repository.findCoincidentByName(name);
+            return marcas != null ? marcas : new ArrayList<>();
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }

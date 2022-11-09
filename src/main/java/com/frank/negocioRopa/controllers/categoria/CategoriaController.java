@@ -9,4 +9,6 @@ public interface CategoriaController extends BaseController<Categoria, Long> {
 
     ResponseEntity<?> getMarcasAssociatedWithCategoria(Long id);
 
+    ResponseEntity<?> getCategoriasCoincidentByName(String name);
+
 }
