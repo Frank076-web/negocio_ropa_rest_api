@@ -17,16 +17,6 @@ public class MarcaServiceImpl extends BaseServiceImpl<Marca, Long> implements Ma
     private MarcaRepository repository;
 
     @Override
-    public List<Categoria> findMarcaAssosiatedWithCategoria(Long id) throws Exception {
-        try {
-            Marca marca = repository.findById((id)).orElse(null);
-            return marca.getCategorias();
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
     @Transactional
     public Marca findByName(String name) throws Exception {
         try {
