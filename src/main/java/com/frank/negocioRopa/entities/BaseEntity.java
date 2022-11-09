@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
@@ -13,15 +14,11 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-abstract public class BaseEntity {
+abstract public class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     protected Long id;
-
-    @Column(name = "fecha_creacion", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    protected Date fechaCreacion;
 
 }

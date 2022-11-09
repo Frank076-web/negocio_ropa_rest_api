@@ -12,7 +12,7 @@ import java.util.List;
 abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializable> implements BaseService<E, ID>  {
 
     @Autowired
-    BaseRepository<E, ID> repository;
+    protected BaseRepository<E, ID> repository;
 
     @Override
     @Transactional
@@ -38,7 +38,6 @@ abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
     @Transactional
     public E create(E entity) throws Exception {
         try {
-            entity.setFechaCreacion(new Date());
             return repository.save(entity);
         } catch (Exception e){
             throw new Exception(e.getMessage());
@@ -49,7 +48,8 @@ abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
     @Transactional
     public E update(E entity) throws Exception {
         try {
-            if (repository.findById((ID) entity.getId()).isPresent()) {
+            E actualEntity = repository.findById((ID) entity.getId()).get();
+            if (actualEntity != null) {
                 return repository.save(entity);
             } else {
                 throw new Exception("Error: la entidad solicitada para actualizar no existe");
