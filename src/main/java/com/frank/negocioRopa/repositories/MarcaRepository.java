@@ -1,6 +1,5 @@
 package com.frank.negocioRopa.repositories;
 
-import com.frank.negocioRopa.entities.Categoria;
 import com.frank.negocioRopa.entities.Marca;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,6 +20,6 @@ public interface MarcaRepository extends BaseRepository<Marca, Long>{
             nativeQuery = true,
             value = "SELECT * FROM marcas m WHERE m.nombre LIKE %?1%"
     )
-    List<Categoria> findCoincidentByName(String name);
+    List<Marca> findCoincidentByName(String name);
 
 }

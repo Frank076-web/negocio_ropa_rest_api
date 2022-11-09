@@ -1,6 +1,5 @@
 package com.frank.negocioRopa.repositories;
 
-import com.frank.negocioRopa.entities.Categoria;
 import com.frank.negocioRopa.entities.Talla;
 import org.springframework.data.jpa.repository.Query;
 
@@ -19,6 +18,6 @@ public interface TallaRepository extends BaseRepository<Talla, Long>{
             nativeQuery = true,
             value = "SELECT * FROM tallas t WHERE t.nombre LIKE %?1%"
     )
-    List<Categoria> findCoincidentByName(String name);
+    List<Talla> findCoincidentByName(String name);
 
 }
