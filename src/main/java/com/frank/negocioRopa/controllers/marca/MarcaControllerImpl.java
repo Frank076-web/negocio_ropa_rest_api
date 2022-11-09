@@ -16,6 +16,17 @@ public class MarcaControllerImpl extends BaseControllerImpl<Marca, MarcaServiceI
     @Autowired
     MarcaServiceImpl service;
 
+
+    @Override
+    @GetMapping("/{id}/categorias")
+    public ResponseEntity<?> getCategoriaAssociatedWithMarcas(@PathVariable Long id) {
+        try {
+            return response.buildResponse(HttpStatus.OK, service.findMarcaAssosiatedWithCategoria(id), "OK");
+        } catch (Exception e){
+            return response.buildResponse(HttpStatus.NOT_FOUND, "Hubo un error, por favor intente de nuevo más tarde");
+        }
+    }
+
     @Override
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody Marca entity) {

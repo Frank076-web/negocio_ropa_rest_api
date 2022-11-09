@@ -9,14 +9,14 @@ import java.io.Serializable;
 
 public interface BaseController<E extends BaseEntity, ID extends Serializable> {
 
-    ResponseEntity<?> getAll() throws Exception;
+    ResponseEntity<?> getAll();
 
-    ResponseEntity<?> getOneById(@PathVariable ID id) throws Exception;
+    ResponseEntity<?> getOneById(@PathVariable ID id);
 
-    ResponseEntity<?> save(@RequestBody E entity) throws Exception;
+    ResponseEntity<?> save(@RequestBody E entity);
 
-    ResponseEntity<?> update(@RequestBody E entity) throws Exception;
+    ResponseEntity<?> update(@RequestBody E entity);
 
-    ResponseEntity<?> remove(@PathVariable ID id) throws Exception;
+    ResponseEntity<?> remove(@PathVariable ID id);
 
 }

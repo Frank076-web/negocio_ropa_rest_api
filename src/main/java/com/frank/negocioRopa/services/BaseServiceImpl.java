@@ -38,7 +38,6 @@ abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
     @Transactional
     public E create(E entity) throws Exception {
         try {
-            entity.setFechaCreacion(new Date());
             return repository.save(entity);
         } catch (Exception e){
             throw new Exception(e.getMessage());
@@ -51,7 +50,6 @@ abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
         try {
             E actualEntity = repository.findById((ID) entity.getId()).get();
             if (actualEntity != null) {
-                entity.setFechaCreacion(actualEntity.getFechaCreacion());
                 return repository.save(entity);
             } else {
                 throw new Exception("Error: la entidad solicitada para actualizar no existe");

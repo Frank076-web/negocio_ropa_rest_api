@@ -18,7 +18,7 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
 
     @Override
     @GetMapping("")
-    public ResponseEntity<?> getAll() throws Exception {
+    public ResponseEntity<?> getAll() {
         try {
             return response.buildResponse(HttpStatus.OK, service.findAll(), "OK");
         } catch (Exception e){
@@ -28,7 +28,7 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOneById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<?> getOneById(@PathVariable Long id) {
         try {
             return response.buildResponse(HttpStatus.OK, service.findOneById(id), "OK");
         } catch (Exception e){
@@ -38,7 +38,7 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
 
     @Override
     @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody E entity) throws Exception {
+    public ResponseEntity<?> save(@RequestBody E entity) {
         try {
             return response.buildResponse(HttpStatus.CREATED, service.create(entity), "OK");
         } catch (Exception e){
@@ -48,7 +48,7 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
 
     @Override
     @PutMapping("")
-    public ResponseEntity<?> update(@RequestBody E entity) throws Exception {
+    public ResponseEntity<?> update(@RequestBody E entity) {
         try {
             return response.buildResponse(HttpStatus.OK, service.update(entity), "OK");
         } catch (Exception e){
@@ -58,7 +58,7 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
 
     @Override
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> remove(@PathVariable Long id) throws Exception {
+    public ResponseEntity<?> remove(@PathVariable Long id) {
         try {
             service.delete(id);
             return response.buildResponse(HttpStatus.OK, "Eliminado Correctamente");

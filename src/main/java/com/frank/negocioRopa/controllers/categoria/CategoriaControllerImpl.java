@@ -17,6 +17,16 @@ public class CategoriaControllerImpl extends BaseControllerImpl<Categoria, Categ
     CategoriaServiceImpl service;
 
     @Override
+    @GetMapping("/{id}/marcas")
+    public ResponseEntity<?> getMarcasAssociatedWithCategoria(@PathVariable Long id) {
+        try {
+            return response.buildResponse(HttpStatus.OK, service.findMarcasAssosiatedWithCategoria(id), "OK");
+        } catch (Exception e){
+            return response.buildResponse(HttpStatus.NOT_FOUND, "Hubo un error, por favor intente de nuevo más tarde");
+        }
+    }
+
+    @Override
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody Categoria entity) {
         try {
